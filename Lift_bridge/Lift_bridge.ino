@@ -1,3 +1,5 @@
+#include <LiquidCrystal.h>
+
 // ************ Data structure definitions ************ //
 
 enum LEDState {
@@ -137,6 +139,9 @@ QTI leftLaneSensor2 = QTI(9);
 QTI rightLaneSensor1 = QTI(10);
 QTI rightLaneSensor2 = QTI(11);
 
+// LCD
+LiquidCrystal lcd(A5, A4, A0, A1, A2, A3);
+
 // ************ Globals ************ //
 int leftLaneCars = 0;
 int rightLaneCars = 0;
@@ -150,6 +155,7 @@ const int holdBridgeDelay = 5000;
 // Setup pins and serial monitor
 void setup() {
   Serial.begin(9600); // Set up serial monitor for debug output
+  lcd.begin(16, 2);
 
   pinMode(motorOutput1, OUTPUT);
   digitalWrite(motorOutput1, LOW);
@@ -188,6 +194,16 @@ void stopMotors() {
 // Move the bridge. If up = true, move it up, otherwise move it down
 void moveBridge(bool up) {
   //Make both LEDs flash at the same time, but alternating
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("STOP");
+  lcd.setCursor(0, 1);
+  if(up) {
+    lcd.print("BRIDGE RISING");
+  }
+  else {
+    lcd.print("BRIDGE LOWERING");
+  }
   stopLED.lastFlash = standbyLED.lastFlash;
   stopLED.powerState = !standbyLED.powerState;
   standbyLED.setState(FLASHING);
@@ -246,27 +262,45 @@ void loop() {
   Serial.print(rightLaneCars);
   Serial.print(leftLaneCars);
   Serial.print(boatWaiting);
-  Serial.println("");
 
-  // Serial.print(' ');
-  // leftLaneSensor1.readAndPrint();
-  // leftLaneSensor2.readAndPrint();
-  // boatSensor2.readAndPrint(true);
+  Serial.print(' ');
+  leftLaneSensor1.readAndPrint();
+  leftLaneSensor2.readAndPrint();
+  boatSensor2.readAndPrint();
+  Serial.print(' ');
+  rightLaneSensor1.readAndPrint();
+  rightLaneSensor2.readAndPrint();
+  boatSensor2.readAndPrint();
+
+  Serial.println("");
 
   // Update LEDs based on whether there's a boat request
   if (boatWaiting) {
     standbyLED.setState(FLASHING);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Stop for boat");
+    lcd.setCursor(0, 1);
+    lcd.print("Cars: " + String(abs(rightLaneCars) + abs(leftLaneCars)));
   }
   else {
+    lcd.setCursor(0, 0);
+    lcd.print("Safe to cross");
+    lcd.setCursor(0, 1);
+    lcd.print("");
     standbyLED.setState(OFF);
   }
 
   // Move bridge if boat and no cars
   if(boatWaiting && rightLaneCars ==0 && leftLaneCars == 0) {
     moveBridge(true);
+    lcd.setCursor(0, 1);
+    lcd.print("WAITING FOR BOAT");
     delayWithSubroutines(holdBridgeDelay);
+    
     moveBridge(false);
     boatWaiting = false;
+    lcd.clear();
   }
 
   // Update LED state machine
