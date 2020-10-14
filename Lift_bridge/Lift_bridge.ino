@@ -152,7 +152,7 @@ int leftLaneCars = 0;
 int rightLaneCars = 0;
 bool boatWaiting = false;
 const int upMotorOut = HIGH; // The value to set to motorOutput1 when raising the bridge
-const int bookendDelay = 5000;
+const int bookendDelay = 2500;
 const int liftDelay = 22000;
 const int lowerDelay = 8000;
 const int holdBridgeDelay = 10000;
@@ -243,9 +243,6 @@ void moveBridge(bool up) {
 
 // Update LED state machines
 void LEDUpdate() {
-  Serial.print(standbyLED.getState());
-  Serial.print(" ");
-  Serial.println(stopLED.getState());
   standbyLED.updatePower();
   stopLED.updatePower();
 }
