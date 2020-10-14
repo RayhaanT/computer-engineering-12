@@ -99,11 +99,11 @@ ${OBJECTDIR}/main.o: main.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} dummy.d -e "C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.asm\" 
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.O ${OBJECTDIR}/main.o
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.ERR ${OBJECTDIR}/main.o.err
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.LST ${OBJECTDIR}/main.o.lst
-	@${RM}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.HEX 
+	@${FIXDEPS} dummy.d -e "C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.asm\" 
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.O ${OBJECTDIR}/main.o
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.ERR ${OBJECTDIR}/main.o.err
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.LST ${OBJECTDIR}/main.o.lst
+	@${RM}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/main.o"
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
@@ -112,11 +112,11 @@ ${OBJECTDIR}/main.o: main.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} dummy.d -e "C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.asm\" 
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.O ${OBJECTDIR}/main.o
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.ERR ${OBJECTDIR}/main.o.err
-	@${MV}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.LST ${OBJECTDIR}/main.o.lst
-	@${RM}  C:/Users/rayha/Documents/compeng12/PICTutorial4.X/main.HEX 
+	@${FIXDEPS} dummy.d -e "C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.asm\" 
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.O ${OBJECTDIR}/main.o
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.ERR ${OBJECTDIR}/main.o.err
+	@${MV}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.LST ${OBJECTDIR}/main.o.lst
+	@${RM}  C:/Users/Rayhaan/Documents/computer-engineering-12/PICTutorial4.X/main.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/main.o"
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
