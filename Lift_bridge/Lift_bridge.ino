@@ -57,7 +57,7 @@ int QTI::readRisingEdge() {
   return 0;
 }
 
-const int LEDFlashInterval = 500;
+const unsigned long LEDFlashInterval = 500;
 
 class LEDPair {
 private:
@@ -66,7 +66,7 @@ private:
   LEDState state = OFF;
 
 public:
-  int lastFlash = 0;
+  unsigned long lastFlash = 0;
   bool powerState = false; // false = off, true = on
 
   LEDPair(int _pin1, int _pin2);
@@ -74,6 +74,7 @@ public:
   void updatePower();
   void setLastFlash(int _lastFlash);
   void getLastFlash();
+  LEDState getState();
 };
 
 LEDPair::LEDPair(int _pin1, int _pin2) {
@@ -102,7 +103,7 @@ void LEDPair::updatePower() {
     digitalWrite(pin2, HIGH);
   }
   else if (state == FLASHING) {
-    int timeNow = millis();
+    unsigned long timeNow = millis();
     if(timeNow - lastFlash < LEDFlashInterval) {
       return;
     }
@@ -117,6 +118,10 @@ void LEDPair::updatePower() {
     powerState = !powerState;
     lastFlash = timeNow;
   }
+}
+
+LEDState LEDPair::getState() {
+  return state;
 }
 
 // ************ Pins and components ************ //
@@ -142,10 +147,10 @@ int leftLaneCars = 0;
 int rightLaneCars = 0;
 bool boatWaiting = false;
 const int upMotorOut = HIGH; // The value to set to motorOutput1 when raising the bridge
-const int bookendDelay = 1000;
-const int liftDelay = 5000;
-const int lowerDelay = 4000;
-const int holdBridgeDelay = 5000;
+const int bookendDelay = 5000;
+const int liftDelay = 22000;
+const int lowerDelay = 8000;
+const int holdBridgeDelay = 10000;
 
 // Setup pins and serial monitor
 void setup() {
@@ -221,12 +226,16 @@ void moveBridge(bool up) {
 
 // Update LED state machines
 void LEDUpdate() {
+  Serial.print(standbyLED.getState());
+  Serial.print(" ");
+  Serial.println(stopLED.getState());
   standbyLED.updatePower();
   stopLED.updatePower();
 }
 
 // Main loop
 void loop() {
+  
   // Track cars
   rightLaneCars += rightLaneSensor1.readRisingEdge();
   rightLaneCars -= rightLaneSensor2.readRisingEdge();
