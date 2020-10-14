@@ -157,10 +157,11 @@ const int liftDelay = 22000;
 const int lowerDelay = 8000;
 const int holdBridgeDelay = 10000;
 
-// Setup pins and serial monitor
+// Setup pins, LCD and serial monitor
 void setup() {
   Serial.begin(9600); // Set up serial monitor for debug output
   lcd.begin(16, 2);
+  lcd.noCursor();
 
   pinMode(motorOutput1, OUTPUT);
   digitalWrite(motorOutput1, LOW);
