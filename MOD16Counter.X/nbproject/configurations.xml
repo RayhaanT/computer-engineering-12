@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>delay.inc</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -12,7 +13,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>main.asm</itemPath>
+      <itemPath>counter.asm</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -500,7 +501,7 @@
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Simulator>
       <mpasmsuite>
-        <property key="absolute-mode" value="true"/>
+        <property key="absolute-mode" value="false"/>
         <property key="eeprom-width" value="8"/>
         <property key="extended-mode" value="false"/>
         <property key="extended-mode-mpasm" value="false"/>

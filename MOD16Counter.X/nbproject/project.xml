@@ -3,13 +3,13 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>PICTutorial4</name>
-            <creation-uuid>d5d0a588-98a1-4576-b6b1-9bfef958bfab</creation-uuid>
+            <name>Mod16Counter</name>
+            <creation-uuid>bbcab326-e434-40c9-8b4c-41e16a40a369</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions/>
             <cpp-extensions/>
             <header-extensions/>
-            <asminc-extensions/>
+            <asminc-extensions>inc</asminc-extensions>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList/>
