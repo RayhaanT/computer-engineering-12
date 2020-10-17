@@ -1,12 +1,11 @@
-
-    title "main.asm - ANDing variables"
+    title "main5.asm - Testing the STATUS register"
     ;
-    ; ANDs a few variables for testing
+    ; Perform a series of operation to see their impact on the status register
     ; Hardware Notes:
-    ;	Not intended to be run on hardware
+    ;	Not intended to run on hardware
     ;
     ; Rayhaan Tanweer
-    ; October 10, 2020
+    ; October 15, 2020
     ; ---------------------------------------------------------------------------------------------
     ; Setup
     LIST R=DEC			; the default numbering system is decimal
@@ -17,12 +16,10 @@
 	
     ; variables
     CBLOCK 0x20		    ; assigns variables to first available GPRs, beginning at 0x20
-    
-    i
+    ; put variable names here
     j
-    k
-    result
-	
+    i
+    
     ENDC
 	
     ; ---------------------------------------------------------------------------------------------
@@ -30,24 +27,17 @@
     ; Main code
     
     org 0
+;    movlw 0x80
+;    addlw 0x80
+;    
+;    movlw 0xb8
+;    addlw 0x47
+;    
+;    movlw 0x4
+;    addlw 0x8C
     
-    ; Load values into variable
-    MOVLW 0xaF
-    MOVWF i
-    
-    MOVLW 0x3b
-    MOVWF j
-    
-    MOVLW 0xd4
-    MOVWF k
-    
-    ; Start ANDing
-    MOVF i,0
-    ANDWF j,0
-    MOVWF result
-    MOVF result,0
-    ANDWF k,0
-    MOVWF result
+    movlw 0x5
+    sublw 0x5
     
     goto $
     
@@ -56,4 +46,5 @@
     ; Subroutines/Methods
     
     end
+
 

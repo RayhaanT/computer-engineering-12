@@ -1,27 +1,23 @@
-
-    title "main.asm - ANDing variables"
+    title "flash.asm - Flash an LED"
     ;
-    ; ANDs a few variables for testing
+    ; Flash an LED on and off 
     ; Hardware Notes:
-    ;	Not intended to be run on hardware
+    ;	PIC16F684, connect pin C0 to an LED to see it flash
     ;
     ; Rayhaan Tanweer
-    ; October 10, 2020
+    ; October 16, 2020
     ; ---------------------------------------------------------------------------------------------
     ; Setup
     LIST R=DEC			; the default numbering system is decimal
     INCLUDE "p16f684.inc"       ; include the header file for this PIC
+    INCLUDE "asmDelay.inc"
 				; header connects labels to specific memory addresses
 	
      __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTOSCIO ; put this all one ONE line
 	
     ; variables
     CBLOCK 0x20		    ; assigns variables to first available GPRs, beginning at 0x20
-    
-    i
-    j
-    k
-    result
+    ; put variable names here
 	
     ENDC
 	
@@ -29,31 +25,36 @@
     PAGE
     ; Main code
     
-    org 0
+    org	    0
     
-    ; Load values into variable
-    MOVLW 0xaF
-    MOVWF i
+    movlw   b'111'
+    movwf   CMCON0	    ; turn off comparators
+	
+    bsf	    STATUS, RP0	    ; switch to bank 1 by setting the bank bit
+    clrf    ANSEL ^ 0x080   ; set i/o to digital (defaults to analog)
+	
+    clrf    TRISC ^ 0x080   ; set C ports to output
+    bcf	    STATUS, RP0	    ; switch back to bank 0
     
-    MOVLW 0x3b
-    MOVWF j
-    
-    MOVLW 0xd4
-    MOVWF k
-    
-    ; Start ANDing
-    MOVF i,0
-    ANDWF j,0
-    MOVWF result
-    MOVF result,0
-    ANDWF k,0
-    MOVWF result
-    
-    goto $
+flashLoop
+	
+	nop
+	bsf PORTC, 1
+	    Dlay 200
+	
+	nop
+	bcf PORTC, 1
+	    Dlay 200
+	
+	goto flashLoop
     
     ; ---------------------------------------------------------------------------------------------
     PAGE
     ; Subroutines/Methods
     
     end
+
+
+
+
 
