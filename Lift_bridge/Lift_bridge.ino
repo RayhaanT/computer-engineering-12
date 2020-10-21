@@ -151,10 +151,10 @@ LiquidCrystal lcd(A5, A4, A0, A1, A2, A3);
 int leftLaneCars = 0;
 int rightLaneCars = 0;
 bool boatWaiting = false;
-const int upMotorOut = HIGH; // The value to set to motorOutput1 when raising the bridge
+const int upMotorOut = LOW; // The value to set to motorOutput1 when raising the bridge
 const int bookendDelay = 2500;
 const int liftDelay = 22000;
-const int lowerDelay = 8000;
+const int lowerDelay = 8500;
 const int holdBridgeDelay = 10000;
 
 // Setup pins, LCD and serial monitor
