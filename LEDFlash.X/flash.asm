@@ -40,11 +40,11 @@ flashLoop
 	
 	nop
 	bsf PORTC, 1
-	    Dlay 200
+	    Dlay 1000000
 	
 	nop
 	bcf PORTC, 1
-	    Dlay 200
+	    Dlay 2000000
 	
 	goto flashLoop
     
