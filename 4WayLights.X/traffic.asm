@@ -13,7 +13,7 @@
     ;	    C5: Red
     ;
     ; Rayhaan Tanweer
-    ; October 21, 2020
+    ; October 22, 2020
     ; ---------------------------------------------------------------------------------------------
     ; Setup
     LIST R=DEC			; the default numbering system is decimal
@@ -49,12 +49,12 @@ trafficLoop		    ; Traffic light control loop
 	
 	nop
 	call goNorthSouth
-	Dlay 20000000
+	Dlay 10000000
 	
 	call stopTraffic
 	
 	call goEastWest
-	Dlay 20000000
+	Dlay 10000000
 	
 	call stopTraffic
 	
@@ -67,10 +67,10 @@ trafficLoop		    ; Traffic light control loop
 stopTraffic:
 	movlw 0
 	btfsc PORTC, 0		; Check if east west green is on
-	    addlw b'100010'	; If so, add code to turn east west yellow
-	btfsc PORTC, 4		; Check if north south green is on
-	    addlw b'010100'	; If so, add code to turn north south yellow
-	movlw PORTC
+	    movlw b'100010'	; If so, add code to turn east west yellow
+	btfsc PORTC, 3		; Check if north south green is on
+	    movlw b'010100'	; If so, add code to turn north south yellow
+	movwf PORTC
 	
 	Dlay 5000000		; Delay 5 seconds
 	movlw b'100100'		; Turn both directions red
