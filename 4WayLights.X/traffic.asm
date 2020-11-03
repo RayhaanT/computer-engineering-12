@@ -44,17 +44,17 @@
 	
     clrf    TRISC ^ 0x080   ; set C ports to output
     bcf	    STATUS, RP0	    ; switch back to bank 0
-    
+        
 trafficLoop		    ; Traffic light control loop
 	
 	nop
 	call goNorthSouth
-	Dlay 10000000
+	Dlay 1000000
 	
 	call stopTraffic
 	
 	call goEastWest
-	Dlay 10000000
+	Dlay 1000000
 	
 	call stopTraffic
 	
@@ -66,26 +66,26 @@ trafficLoop		    ; Traffic light control loop
     
 stopTraffic:
 	movlw 0
-	btfsc PORTC, 0		; Check if east west green is on
+	btfsc PORTC, 2		; Check if east west green is on
 	    movlw b'100010'	; If so, add code to turn east west yellow
 	btfsc PORTC, 3		; Check if north south green is on
-	    movlw b'010100'	; If so, add code to turn north south yellow
+	    movlw b'010001'	; If so, add code to turn north south yellow
 	movwf PORTC
 	
-	Dlay 5000000		; Delay 5 seconds
-	movlw b'100100'		; Turn both directions red
+	Dlay 500000		; Delay 5 seconds
+	movlw b'100001'		; Turn both directions red
 	movwf PORTC
 	
-	Dlay 2000000		; Delay 2 seconds
+	Dlay 350000		; Delay 2 seconds
 	return
 
 goNorthSouth:
-	movlw b'001100'		; Turn north south green and east west red
+	movlw b'001001'		; Turn north south green and east west red
 	movwf PORTC
 	return
 
 goEastWest:
-	movlw b'100001'		; Turn east west green and north south red
+	movlw b'100100'		; Turn east west green and north south red
 	movwf PORTC
 	return
     
