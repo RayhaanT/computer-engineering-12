@@ -68,20 +68,14 @@ __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _P
 ; Code Body
  
 loop:
-;    movlw  10			;Move forward 
-;	movwf PORTC			;until hits black line, move accordingly
-;	Dlay 100000
-;	nop
-;		
-;		clrf PORTC		;stop momentarily to get a
-;		Dlay 30000		;more accurate reading from sensors
-;		
-;	btfss PORTA, 5		;if left sensor hits black line, 
-;		call turn_left	;turn left
-;
-;	btfss PORTA, 4		;if right sensor hits black line,
-;		call turn_right	;turn right
-;	
+    movlw  10			;Move forward 
+	movwf PORTC			;until hits black line, move accordingly
+	Dlay 400000
+	nop
+		
+		clrf PORTC		;stop momentarily to get a
+		Dlay 30000		;more accurate reading from sensors
+	
     	call test_right_qti
 	
 	movwf wHolder
@@ -89,6 +83,8 @@ loop:
 	    bsf PORTC, 5
 	btfsc wHolder, 5
 	    bcf PORTC, 5
+	btfss wHolder, 5
+	    call turn_right
 	
 	call test_left_qti
 	
@@ -97,8 +93,10 @@ loop:
 	    bsf PORTC, 4
 	btfsc wHolder, 4
 	    bcf PORTC, 4
+	btfss wHolder, 4
+	    call turn_left
 	
-	call test_left_qti
+	Dlay 10000
 		
  	goto loop
 
@@ -146,7 +144,7 @@ turn_left:		;turn robot left
 	movlw 9
 	movwf PORTC
 	nop
-	Dlay 60000
+	Dlay 600000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
@@ -155,7 +153,7 @@ turn_right:	;turn robot right
 	movlw 6
 	movwf PORTC
 	nop
-	Dlay 60000
+	Dlay 600000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
