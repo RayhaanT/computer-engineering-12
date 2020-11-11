@@ -79,8 +79,7 @@ loop:
 	movf indicators, 0
     
 	movwf PORTC			;until hits black line, move accordingly
-	Dlay 400000
-	nop
+	Dlay 100000
 		
 		clrf PORTC		; stop to get more accurate reading
 		movf indicators, 0
@@ -111,8 +110,7 @@ loop:
 	btfsc PORTA, 2		    ; show LED indicators for QTIs if motors are disabled
 	    call show_indicators
 	btfss PORTA, 2
-;	    clrf indicators	    ; clear indicators if motors enabled, saves power
-	Dlay 10000
+	    clrf indicators	    ; clear indicators if motors enabled, saves power
 		
  	goto loop
 
@@ -167,7 +165,7 @@ turn_left:		;turn robot left
 	movlw 9
 	movwf PORTC
 	nop
-	Dlay 600000
+	Dlay 60000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
@@ -178,7 +176,7 @@ turn_right:	;turn robot right
 	movlw 6
 	movwf PORTC
 	nop
-	Dlay 600000
+	Dlay 60000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
