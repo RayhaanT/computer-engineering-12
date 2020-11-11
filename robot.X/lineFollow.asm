@@ -40,6 +40,7 @@
 
 	wHolder
 	indicators
+	looper
 		 
 	ENDC 
 
@@ -79,13 +80,16 @@ loop:
 	movf indicators, 0
     
 	movwf PORTC			;until hits black line, move accordingly
-	Dlay 100000
+	Dlay 80000
 		
 		clrf PORTC		; stop to get more accurate reading
 		movf indicators, 0
 		movwf PORTC
-		Dlay 15000		
+		Dlay 40000		
 	
+	movlw 3
+	movwf looper
+sense_loop:
     	call test_right_qti
 	
 	movwf wHolder
@@ -105,6 +109,9 @@ loop:
 	    bcf indicators, 4
 	btfsc wHolder, 4
 	    call turn_left
+	
+	decfsz looper
+	    goto sense_loop
 	
 	    
 	btfsc PORTA, 2		    ; show LED indicators for QTIs if motors are disabled
@@ -162,10 +169,10 @@ test_left_qti:
 turn_left:		;turn robot left
     	btfsc PORTA, 2
 	    return
-	movlw 9
+	movlw 6
 	movwf PORTC
 	nop
-	Dlay 60000
+	Dlay 50000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
@@ -173,10 +180,10 @@ turn_left:		;turn robot left
 turn_right:	;turn robot right	
 	btfsc PORTA, 2
 	    return
-	movlw 6
+	movlw 9
 	movwf PORTC
 	nop
-	Dlay 60000
+	Dlay 50000
 		clrf PORTC
 		Dlay 30000
 	return		;return back to main program loop
