@@ -1,4 +1,4 @@
-title  "lineFollow"
+    title  "lineFollow"
 ;
 ; A program which allows the robot to follow a black line 
 ; using two reflective sensors which detect black or white surfaces
@@ -33,13 +33,13 @@ title  "lineFollow"
 	INCLUDE "p16f684.inc" 
 	INCLUDE "delay.inc"
 
-__CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTOSCIO ; put this all one ONE line
+    __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTOSCIO ; put this all one ONE line
 	
 ;  Variables
 	CBLOCK 0x020 
 
 	wHolder
-	motorHolder
+	indicators
 		 
 	ENDC 
 
@@ -63,6 +63,10 @@ __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _P
 	movwf	TRISA^0X080			; and the rest as outputs
 	
 	bcf	    STATUS, RP0	 		; (RA3 must always be an input)
+	
+	movlw 0
+	movwf indicators
+	movwf wHolder
 
 ;-----------------------------------------------------------------------------------------------------
  PAGE
@@ -72,22 +76,24 @@ loop:
     btfss PORTA, 2
 	movlw  10			;Move forward
     btfsc PORTA,2
-	movlw 0
+	movf indicators, 0
     
 	movwf PORTC			;until hits black line, move accordingly
 	Dlay 400000
 	nop
 		
-		clrf PORTC		;stop momentarily to get a
-		Dlay 30000		;more accurate reading from sensors
+		clrf PORTC		; stop to get more accurate reading
+		movf indicators, 0
+		movwf PORTC
+		Dlay 15000		
 	
     	call test_right_qti
 	
 	movwf wHolder
 	btfsc wHolder, 5
-	    bsf PORTC, 5
+	    bsf indicators, 5
 	btfss wHolder, 5
-	    bcf PORTC, 5
+	    bcf indicators, 5
 	btfsc wHolder, 5
 	    call turn_right
 	
@@ -95,12 +101,17 @@ loop:
 	
 	movwf wHolder
 	btfsc wHolder, 4
-	    bsf PORTC, 4
+	    bsf indicators, 4
 	btfss wHolder, 4
-	    bcf PORTC, 4
+	    bcf indicators, 4
 	btfsc wHolder, 4
 	    call turn_left
 	
+	    
+	btfsc PORTA, 2		    ; show LED indicators for QTIs if motors are disabled
+	    call show_indicators
+	btfss PORTA, 2
+;	    clrf indicators	    ; clear indicators if motors enabled, saves power
 	Dlay 10000
 		
  	goto loop
@@ -109,6 +120,11 @@ loop:
 ; subroutines
 
 
+show_indicators:
+    movf indicators, 0
+    movwf PORTA
+    return
+	
 test_right_qti:
     bsf STATUS, RP0	; Switch to bank 1 and set A4 to output
     bcf TRISA, 5

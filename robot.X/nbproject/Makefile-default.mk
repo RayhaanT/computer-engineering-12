@@ -99,7 +99,11 @@ ${OBJECTDIR}/lineFollow.o: lineFollow.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/lineFollow.o.d 
 	@${RM} ${OBJECTDIR}/lineFollow.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/lineFollow.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG  -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/lineFollow.lst\" -e\"${OBJECTDIR}/lineFollow.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/lineFollow.o\" \"lineFollow.asm\" 
+	@${FIXDEPS} dummy.d -e "C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG  -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.asm\" 
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.O ${OBJECTDIR}/lineFollow.o
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.ERR ${OBJECTDIR}/lineFollow.o.err
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.LST ${OBJECTDIR}/lineFollow.o.lst
+	@${RM}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/lineFollow.o"
 	@${FIXDEPS} "${OBJECTDIR}/lineFollow.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
@@ -108,7 +112,11 @@ ${OBJECTDIR}/lineFollow.o: lineFollow.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/lineFollow.o.d 
 	@${RM} ${OBJECTDIR}/lineFollow.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/lineFollow.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/lineFollow.lst\" -e\"${OBJECTDIR}/lineFollow.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/lineFollow.o\" \"lineFollow.asm\" 
+	@${FIXDEPS} dummy.d -e "C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)    \"C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.asm\" 
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.O ${OBJECTDIR}/lineFollow.o
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.ERR ${OBJECTDIR}/lineFollow.o.err
+	@${MV}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.LST ${OBJECTDIR}/lineFollow.o.lst
+	@${RM}  C:/Users/rayha/Documents/compeng12/robot.X/lineFollow.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/lineFollow.o"
 	@${FIXDEPS} "${OBJECTDIR}/lineFollow.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
