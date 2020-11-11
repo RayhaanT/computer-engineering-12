@@ -39,6 +39,7 @@ __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _P
 	CBLOCK 0x020 
 
 	wHolder
+	motorHolder
 		 
 	ENDC 
 
@@ -58,7 +59,7 @@ __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _P
 ;	movlw	b'000111'
 ;	movwf	TRISC^0x080
 
-	movlw 	b'111000'			; teach RA4, RA5 to be digital inputs
+	movlw 	b'111100'			; teach RA5-RA2 to be digital inputs
 	movwf	TRISA^0X080			; and the rest as outputs
 	
 	bcf	    STATUS, RP0	 		; (RA3 must always be an input)
@@ -68,7 +69,11 @@ __CONFIG _FCMEN_OFF & _IESO_OFF & _BOD_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _P
 ; Code Body
  
 loop:
-    movlw  10			;Move forward 
+    btfss PORTA, 2
+	movlw  10			;Move forward
+    btfsc PORTA,2
+	movlw 0
+    
 	movwf PORTC			;until hits black line, move accordingly
 	Dlay 400000
 	nop
@@ -79,21 +84,21 @@ loop:
     	call test_right_qti
 	
 	movwf wHolder
-	btfss wHolder, 5
-	    bsf PORTC, 5
 	btfsc wHolder, 5
-	    bcf PORTC, 5
+	    bsf PORTC, 5
 	btfss wHolder, 5
+	    bcf PORTC, 5
+	btfsc wHolder, 5
 	    call turn_right
 	
 	call test_left_qti
 	
 	movwf wHolder
-	btfss wHolder, 4
-	    bsf PORTC, 4
 	btfsc wHolder, 4
-	    bcf PORTC, 4
+	    bsf PORTC, 4
 	btfss wHolder, 4
+	    bcf PORTC, 4
+	btfsc wHolder, 4
 	    call turn_left
 	
 	Dlay 10000
@@ -139,8 +144,10 @@ test_left_qti:
     
     movf PORTA, 0
     return
-
+    
 turn_left:		;turn robot left
+    	btfsc PORTA, 2
+	    return
 	movlw 9
 	movwf PORTC
 	nop
@@ -150,6 +157,8 @@ turn_left:		;turn robot left
 	return		;return back to main program loop
 
 turn_right:	;turn robot right	
+	btfsc PORTA, 2
+	    return
 	movlw 6
 	movwf PORTC
 	nop
